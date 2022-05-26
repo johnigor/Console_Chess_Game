@@ -1,4 +1,8 @@
-﻿namespace tabuleiro
+﻿using System;
+using tabuleiro;
+using Xadrez_Console;
+
+namespace tabuleiro
 {
     class Peca
     {
