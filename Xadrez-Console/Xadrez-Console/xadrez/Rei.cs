@@ -14,13 +14,13 @@ namespace xadrez
 
         private bool PodeMover(Posicao pos)
         {
-            Peca p = Tab.peca(pos);
+            Peca p = Tab.Peca(pos);
             return p == null || p.Cor != Cor;
         }
 
         private bool TesteTorreParaRoque(Posicao pos)
         {
-            Peca p = Tab.peca(pos);
+            Peca p = Tab.Peca(pos);
             return p != null && p is Torre && p.Cor == Cor && p.QtdMovimentos == 0;
         }
 
@@ -88,7 +88,7 @@ namespace xadrez
                 {
                     Posicao p1 = new Posicao(posicao.Linha, posicao.Coluna + 1);
                     Posicao p2 = new Posicao(posicao.Linha, posicao.Coluna + 2);
-                    if (Tab.peca(p1) == null && Tab.peca(p2) == null)
+                    if (Tab.Peca(p1) == null && Tab.Peca(p2) == null)
                     {
                         mat[posicao.Linha, posicao.Coluna + 2] = true;
                     }
@@ -100,7 +100,7 @@ namespace xadrez
                     Posicao p1 = new Posicao(posicao.Linha, posicao.Coluna - 1);
                     Posicao p2 = new Posicao(posicao.Linha, posicao.Coluna - 2);
                     Posicao p3 = new Posicao(posicao.Linha, posicao.Coluna - 3);
-                    if (Tab.peca(p1) == null && Tab.peca(p2) == null && Tab.peca(p3) == null)
+                    if (Tab.Peca(p1) == null && Tab.Peca(p2) == null && Tab.Peca(p3) == null)
                     {
                         mat[posicao.Linha, posicao.Coluna - 2] = true;
                     }

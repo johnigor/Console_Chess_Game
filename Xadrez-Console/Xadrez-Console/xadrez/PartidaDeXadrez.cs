@@ -142,6 +142,21 @@ namespace xadrez
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
 
+            Peca p = Tab.Peca(destino);
+
+            // #jogadaespecial promocao
+            if (p is Peao)
+            {
+                if (p.Cor == Cor.Branca && destino.Linha == 0 || p.Cor == Cor.Preta && destino.Linha == 7)
+                {
+                    p = Tab.RetirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(Tab, p.Cor);
+                    Tab.ColocarPeca(dama, destino);
+                    pecas.Add(dama);
+                }
+            }
+
             if (EstaEmXeque(Adversaria(JogadorAtual)))
             {
                 Xeque = true;
@@ -161,8 +176,6 @@ namespace xadrez
                 MudaJogador();
             }
 
-            Peca p = Tab.peca(destino);
-
             // #jogadaespecial en passant
             if (p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
             {
@@ -172,19 +185,20 @@ namespace xadrez
             {
                 VulneravelEnPassant = null;
             }
+
         }
 
         public void ValidarPosicaoDeOrigem(Posicao pos)
         {
-            if (Tab.peca(pos) == null)
+            if (Tab.Peca(pos) == null)
             {
                 throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
             }
-            if (JogadorAtual != Tab.peca(pos).Cor)
+            if (JogadorAtual != Tab.Peca(pos).Cor)
             {
                 throw new TabuleiroException("A peça de origem escolhida não é sua!");
             }
-            if (!Tab.peca(pos).ExisteMovimentosPossiveis())
+            if (!Tab.Peca(pos).ExisteMovimentosPossiveis())
             {
                 throw new TabuleiroException("Não há movimntos possíveis para a peça de origem escolhida");
 
@@ -193,7 +207,7 @@ namespace xadrez
 
         public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
-            if (!Tab.peca(origem).MovimentoPossivel(destino))
+            if (!Tab.Peca(origem).MovimentoPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }

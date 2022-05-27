@@ -18,15 +18,12 @@
             return Pecas[linha, coluna];
         }
 
-        public Peca peca(Posicao pos)
-        {
-            return Pecas[pos.Linha, pos.Coluna];
-        }
+        public Peca Peca(Posicao pos) => Pecas[pos.Linha, pos.Coluna];
 
         public bool ExistePeca(Posicao pos)
         {
             ValidarPosicao(pos);
-            return peca(pos) != null;
+            return Peca(pos) != null;
         }
 
         public void ColocarPeca(Peca p, Posicao pos)
@@ -41,11 +38,11 @@
 
         public Peca RetirarPeca(Posicao pos)
         {
-            if (peca(pos) == null)
+            if (Peca(pos) == null)
             {
                 return null;
             }
-            Peca aux = peca(pos);
+            Peca aux = Peca(pos);
             aux.posicao = null;
             Pecas[pos.Linha, pos.Coluna] = null;
             return aux;
