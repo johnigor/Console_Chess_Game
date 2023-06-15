@@ -1,3 +1,3 @@
 # Chess
 
-This chess game is made in C# and is displayed as a console application.
+This is a chess game made with C# and it's displayed as a console application.
